@@ -6,7 +6,12 @@ public class seeking : MonoBehaviour
 {
     public GameObject Sphere;
     public GameObject Target;
-
+    public Vector3 currentVelocity;
+    public Vector3 desiredVelocity;
+    public Vector3 Displacement;
+    public Vector3 Steering;
+    public float SteeringMag = 1.0f;
+    public float Mass = 10;
    
 
     public Vector3 Norm(Vector3 x)
@@ -23,25 +28,17 @@ public class seeking : MonoBehaviour
     // Use this for initialization
     void Start ()
     {
-
+        currentVelocity = Norm(Sphere.transform.position);
+        
     }
 
     // Update is called once per frame
     void Update ()
 	{
+	    Displacement = Target.transform.position - Sphere.transform.position;
+	    Steering = Vector3.ClampMagnitude((Displacement - currentVelocity),1.0f) / Mass;
+	    currentVelocity += Steering;
+        Sphere.transform.position = Sphere.transform.position + currentVelocity;
 
-
-
-	    if (Sphere.transform.position.x > Target.transform.position.x)
-	    {
-            Sphere.transform.position =  Sphere.transform.position - Norm(Target.transform.position) * Time.deltaTime;
-        }
-        if (Sphere.transform.position.x < Target.transform.position.x)
-        {
-            Sphere.transform.position =  Sphere.transform.position + Norm(Target.transform.position) * Time.deltaTime;
-        }
-
-
-
-    }
+	}
 }
