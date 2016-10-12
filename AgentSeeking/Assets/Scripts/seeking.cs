@@ -2,14 +2,14 @@
 using System.Collections;
 using System;
 
-public class seeking : MonoBehaviour
+public class Seeking : MonoBehaviour
 {
     public GameObject Sphere;
     public GameObject Target;
     public Vector3 currentVelocity;
-    public Vector3 desiredVelocity;
-    public Vector3 Displacement;
-    public Vector3 Steering;
+    private Vector3 desiredVelocity;
+    private Vector3 Displacement;
+    private Vector3 Steering;
     public float SteeringMag = 1.0f;
     public float Mass = 10;
    
@@ -28,8 +28,7 @@ public class seeking : MonoBehaviour
     // Use this for initialization
     void Start ()
     {
-        currentVelocity = Norm(Sphere.transform.position);
-        
+        currentVelocity = Norm(Sphere.transform.position);      
     }
 
     // Update is called once per frame
